@@ -59,6 +59,8 @@ public class Celda extends androidx.appcompat.widget.AppCompatImageButton {
 
         setMinimumWidth(size);
         setMinimumHeight(size);
+        setMaxHeight(size);
+        setMaxWidth(size);
 
         setBackgroundColor(getResources().getColor(color.getAttribute(),getContext().getTheme()));
 
@@ -79,6 +81,15 @@ public class Celda extends androidx.appcompat.widget.AppCompatImageButton {
 
     public void setPieza(Pieza pieza) {
         this.pieza = pieza;
+        //Establecer imagen en la celda
+        if (pieza!=null){
+            setImageResource(pieza.getChessType().getForma());
+            setScaleType(ScaleType.FIT_CENTER);
+            setAdjustViewBounds(true);
+        }else{
+            setImageResource(0);
+        }
+
     }
     public void setColor(ColorCelda color) {
         this.color = color;
@@ -87,15 +98,17 @@ public class Celda extends androidx.appcompat.widget.AppCompatImageButton {
     public void resetColor(){
         color=originalColor;
         setBackgroundColor(getResources().getColor(color.getAttribute(),getContext().getTheme()));
+        setAdjustViewBounds(true);
     }
 
     /**
      * Enumerador de Colores
      */
     public enum ColorCelda{
-        WHITE_Cell(R.color.white),
-        BLACK_Cell(R.color.black),
+        WHITE_Cell(R.color.fondoCeldaClaro),
+        BLACK_Cell(R.color.fondoCeldaOscura),
         BLACK(R.color.black),
+        WHITE(R.color.white),
 
         HIGHLIGHT_MOV_WHITE(R.color.white_hightlight_move),
         HIGHLIGHT_MOV_BLACK(R.color.black_hightlight_move),

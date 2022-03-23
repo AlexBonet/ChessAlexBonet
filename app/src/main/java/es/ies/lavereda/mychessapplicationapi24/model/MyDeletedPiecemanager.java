@@ -5,4 +5,9 @@ public class MyDeletedPiecemanager implements IDeletePieceManager{
     public void add(Pieza p) {
 
     }
+
+    @Override
+    public void remove(Pieza p) {
+
+    }
 }
