@@ -11,11 +11,15 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.util.*;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import es.ies.lavereda.mychessapplicationapi24.R;
+import es.ies.lavereda.mychessapplicationapi24.model.Piezas.Blancas.WAlfil;
+import es.ies.lavereda.mychessapplicationapi24.model.Piezas.Negras.BAlfil;
 
 public class TableroChess extends TableLayout {
+    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private Map<Coordenada,Celda> celdas;
     private IDeletePieceManager store4InBoard;
     private IDeletePieceManager store4Deleted;
@@ -34,23 +38,9 @@ public class TableroChess extends TableLayout {
         Coordenada c;
         Celda cell;
         TableRow tableRow;
-        tableRow=new TableRow(getContext());
-        for (int i='A';i<='H';i++){
-            tableRow.addView(getNewLabel(i).valueOf((char)i));
-        }
-        addView(tableRow);
 
-        for (int row=1;row<=8;row++){
-            tableRow=new TableRow(getContext());
-            tableRow.addView(getNewLabel().valueOf((char)row));
-            for (int col=0;col<8;col++){
-                c=new Coordenada((char)('A'+col),row);
-                cell=new Celda(context,this,c);
-                celdas.put(c,cell);
-                tableRow.addView(cell);
-            }
-            addView(tableRow);
-        }
+        initializeCells();
+        LOGGER.finest("Board created.");
 //        placePieces();
     }
 
@@ -62,25 +52,58 @@ public class TableroChess extends TableLayout {
         return store4Deleted;
     }
 
-    public TextView getNewLabel(String character){
-        DisplayMetrics displayMetrics=new DisplayMetrics();
-        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int padding=(int) (displayMetrics.density * 16);
-        int width = displayMetrics.widthPixels-padding;
+    private void initializeCells() {
+        Coordenada coordinate;
+        Celda cell;
+        TableRow tableRow;
 
-        int size = (width) / 10;
+        tableRow = new TableRow(getContext());
+        tableRow.addView(getNewLabel(""));
+        for(int i='A';i<='H';i++)
+            tableRow.addView(getNewLabel(String.valueOf((char)i)));
+        tableRow.addView(getNewLabel(""));
+        addView(tableRow);
 
-        TextView textView=new TextView(getContext());
-        textView.setText(character);
-//        textView.setBackground(getContext().getResources().getColor(R.color.white_hightlight_kill));
-        textView.setTextColor(getContext().getResources().getColor(R.color.black));
-        textView.setGravity(Gravity.CENTER);
-        textView.setWidth(width/10);
-        textView.setHeight(width/10);
-        return  textView;
+        for (int row = 0; row < 8; row++) {
+            tableRow = new TableRow(getContext());
+            tableRow.addView(getNewLabel(String.valueOf(row)));
+            for (int col = 0; col < 8; col++) {
+                coordinate = new Coordenada((char) ('A' + col), 1 + row);
+                cell = new Celda(getContext(),null,this, coordinate);
 
+                celdas.put(coordinate, cell);
+                tableRow.addView(cell);
+            }
+            tableRow.addView(getNewLabel(String.valueOf(row)));
+
+            addView(tableRow);
+        }
+
+        tableRow = new TableRow(getContext());
+        tableRow.addView(getNewLabel(""));
+        for(int i='A';i<='H';i++)
+            tableRow.addView(getNewLabel(String.valueOf((char)i)));
+        tableRow.addView(getNewLabel(""));
+        addView(tableRow);
     }
 
+    public TextView getNewLabel(String characters) {
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        //int padding = (int) (displayMetrics.density * 16);
+        int padding = (int)(getResources().getDimension(R.dimen.board_padding) * 2);
+        int width = displayMetrics.widthPixels - padding;
+
+        TextView textView = new TextView(getContext());
+        textView.setText(characters);
+        textView.setBackgroundColor(getResources().getColor(R.color.label_border_color,getContext().getTheme()));
+        textView.setTextColor(getResources().getColor(R.color.white,getContext().getTheme()));
+        textView.setGravity(Gravity.CENTER);
+        textView.setWidth(width / 10);
+        textView.setHeight(width / 10);
+        return textView;
+    }
     /**
      * Colocar Piezas
      */
@@ -99,10 +122,10 @@ public class TableroChess extends TableLayout {
 //        whitePiezas.add(new WTorre(getCellAt(new Coordenada('A',8))));
 //        whitePiezas.add(new WTorre(getCellAt(new Coordenada('H',8))));
 //
-//        blackPiezas.add(new BAlfil(getCellAt(new Coordenada('C',1))));
-//        blackPiezas.add(new BAlfil(getCellAt(new Coordenada('F',1))));
-//        whitePiezas.add(new WAlfil(getCellAt(new Coordenada('C',8))));
-//        whitePiezas.add(new WAlfil(getCellAt(new Coordenada('F',8))));
+        blackPiezas.add(new BAlfil(getCellAt(new Coordenada('C',1))));
+        blackPiezas.add(new BAlfil(getCellAt(new Coordenada('F',1))));
+        whitePiezas.add(new WAlfil(getCellAt(new Coordenada('C',8))));
+        whitePiezas.add(new WAlfil(getCellAt(new Coordenada('F',8))));
 //
 //        blackPiezas.add(new BQueen(getCellAt(new Coordenada('D',1))));
 //        whitePiezas.add(new WQueen(getCellAt(new Coordenada('D',8))));

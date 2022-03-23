@@ -23,20 +23,21 @@ public class Celda extends androidx.appcompat.widget.AppCompatImageButton {
         super(context);
     }
 
-    public Celda(Context context, TableroChess tablero, Coordenada coordenada){
-        super(context);
+    public Celda(Context context,AttributeSet attrs, TableroChess tablero, Coordenada coordenada){
+        super(context,attrs);
 
-        DisplayMetrics displayMetrics=new DisplayMetrics();
-        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int padding=(int) (displayMetrics.density * 16);
-        int width = displayMetrics.widthPixels-padding;
+//        DisplayMetrics displayMetrics=new DisplayMetrics();
+//        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+////        int padding=(int) (displayMetrics.density * 16);
+//        int padding=(int) getResources().getDimension(R.dimen.board_padding) * 2;
+//        int width = displayMetrics.widthPixels-padding;
 
-        int size = (width) / 10;
-
-        setMaxHeight(size);
-        setMaxWidth(size);
-        setMinimumHeight(size);
-        setMinimumWidth(size);
+//        int size = (width) / 10;
+//
+//        setMaxHeight(size);
+//        setMaxWidth(size);
+//        setMinimumHeight(size);
+//        setMinimumWidth(size);
 
         this.tablero=tablero;
         this.coordenada=coordenada;
@@ -45,10 +46,23 @@ public class Celda extends androidx.appcompat.widget.AppCompatImageButton {
         else
             originalColor= ColorCelda.WHITE_Cell;
 
-        color=originalColor;
+        this.color=originalColor;
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        //int padding = (int) (displayMetrics.density * 16);
+        int padding = (int)(getResources().getDimension(R.dimen.board_padding) * 2);
+        int width = displayMetrics.widthPixels - padding;
+        getResources().getDimension(R.dimen.board_padding);
+
+        int size = (width) / 10;
+
+        setMinimumWidth(size);
+        setMinimumHeight(size);
+
+        setBackgroundColor(getResources().getColor(color.getAttribute(),getContext().getTheme()));
 
     }
-
 
     public Pieza getPieza() {
         return pieza;
@@ -71,7 +85,8 @@ public class Celda extends androidx.appcompat.widget.AppCompatImageButton {
     }
 
     public void resetColor(){
-        this.setColor(originalColor);
+        color=originalColor;
+        setBackgroundColor(getResources().getColor(color.getAttribute(),getContext().getTheme()));
     }
 
     /**
