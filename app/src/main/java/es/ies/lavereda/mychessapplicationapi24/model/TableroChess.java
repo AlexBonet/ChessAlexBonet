@@ -80,15 +80,15 @@ public class TableroChess extends TableLayout {
 
         for (int row = 0; row <8; row++) {
             tableRow = new TableRow(getContext());
-            tableRow.addView(getNewLabel(String.valueOf(row)));
+            tableRow.addView(getNewLabel(String.valueOf(row+1)));
             for (int col = 0; col < 8; col++) {
-                coordinate = new Coordenada((char) ('A' + col), 1 + row);
+                coordinate = new Coordenada((char) ('A' + col ), 1 + row);
                 cell = new Celda(getContext(),null,this, coordinate);
 
                 celdas.put(coordinate, cell);
                 tableRow.addView(cell);
             }
-            tableRow.addView(getNewLabel(String.valueOf(row)));
+            tableRow.addView(getNewLabel(String.valueOf(row+1)));
 
             addView(tableRow);
         }
