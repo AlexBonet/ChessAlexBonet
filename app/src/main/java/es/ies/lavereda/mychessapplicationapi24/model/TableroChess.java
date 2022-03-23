@@ -6,6 +6,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -36,14 +37,17 @@ public class TableroChess extends TableLayout {
     private List<Pieza> whitePiezas;
     private List<Pieza> blackPiezas;
 
-    public TableroChess(Context context, AttributeSet attrs) {
+    public TableroChess(Context context, AttributeSet attrs ) {
         super(context, attrs);
 
         celdas=new HashMap<>();
-        store4InBoard = new  MyDeletedPiecemanager();
-        store4Deleted = new MyDeletedPiecemanager();
+        DeletedPanel whitePanel=findViewById(R.id.PanelBlanco);
+        DeletedPanel blackPanel=findViewById(R.id.PanelNegro);
+//        store4InBoard = new MyDeletedPieceManager(whitePanel,blackPanel);
+        store4Deleted = new MyDeletedPieceManager(whitePanel,blackPanel);
         whitePiezas=new LinkedList<>();
         blackPiezas=new LinkedList<>();
+
 
         Coordenada c;
         Celda cell;
@@ -114,6 +118,8 @@ public class TableroChess extends TableLayout {
         textView.setHeight(width / 10);
         return textView;
     }
+
+
     /**
      * Colocar Piezas
      */
@@ -297,7 +303,8 @@ public class TableroChess extends TableLayout {
         return false;
     }
 
-
-
-
+    public void setOnClickListener(View.OnClickListener listener){
+        for (Celda c:celdas.values())
+            c.setOnClickListener(listener);
+    }
 }

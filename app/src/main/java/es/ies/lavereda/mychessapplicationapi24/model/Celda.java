@@ -84,8 +84,10 @@ public class Celda extends androidx.appcompat.widget.AppCompatImageButton {
         //Establecer imagen en la celda
         if (pieza!=null){
             setImageResource(pieza.getChessType().getForma());
+            setPadding(0,0,0,0);
             setScaleType(ScaleType.FIT_CENTER);
             setAdjustViewBounds(true);
+
         }else{
             setImageResource(0);
         }
@@ -99,6 +101,11 @@ public class Celda extends androidx.appcompat.widget.AppCompatImageButton {
         color=originalColor;
         setBackgroundColor(getResources().getColor(color.getAttribute(),getContext().getTheme()));
         setAdjustViewBounds(true);
+    }
+
+    @Override
+    public String toString() {
+        return coordenada.toString();
     }
 
     /**

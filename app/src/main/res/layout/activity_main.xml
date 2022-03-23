@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <es.ies.lavereda.mychessapplicationapi24.model.TableroChess
+        android:id="@+id/board"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,4 +31,31 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </es.ies.lavereda.mychessapplicationapi24.model.TableroChess>
+
+    <es.ies.lavereda.mychessapplicationapi24.model.DeletedPanel
+        android:id="@+id/PanelBlanco"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/fondoPanelBlancas"
+        app:layout_constraintBottom_toTopOf="@+id/board"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <es.ies.lavereda.mychessapplicationapi24.model.DeletedPanel
+        android:id="@+id/PanelNegro"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/fondoPanelNegras"
+        android:backgroundTint="@color/fondoPanelNegras"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/board" />
 </androidx.constraintlayout.widget.ConstraintLayout>
