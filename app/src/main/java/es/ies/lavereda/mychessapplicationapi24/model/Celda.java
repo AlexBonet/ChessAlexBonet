@@ -82,13 +82,13 @@ public class Celda extends androidx.appcompat.widget.AppCompatImageButton {
     public void setPieza(Pieza pieza) {
         this.pieza = pieza;
         //Establecer imagen en la celda
-        if (pieza!=null){
+        if (pieza != null) {
             setImageResource(pieza.getChessType().getForma());
-            setPadding(0,0,0,0);
+            setPadding(0, 0, 0, 0);
             setScaleType(ScaleType.FIT_CENTER);
             setAdjustViewBounds(true);
 
-        }else{
+        } else {
             setImageResource(0);
         }
 
@@ -102,6 +102,10 @@ public class Celda extends androidx.appcompat.widget.AppCompatImageButton {
         setBackgroundColor(getResources().getColor(color.getAttribute(),getContext().getTheme()));
         setAdjustViewBounds(true);
     }
+
+//    public Pieza containsPiece(){
+//        return
+//    }
 
     @Override
     public String toString() {

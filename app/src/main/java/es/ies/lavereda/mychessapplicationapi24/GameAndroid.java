@@ -10,13 +10,15 @@ import java.util.List;
 import es.ies.lavereda.mychessapplicationapi24.model.Celda;
 import es.ies.lavereda.mychessapplicationapi24.model.ColorPieza;
 import es.ies.lavereda.mychessapplicationapi24.model.Coordenada;
+import es.ies.lavereda.mychessapplicationapi24.model.Pieza;
 import es.ies.lavereda.mychessapplicationapi24.model.TableroChess;
 
 
-public class GameAndroid implements View.OnClickListener, IFinishGame {
+public class GameAndroid implements View.OnClickListener {
     private Context context;
     private TableroChess board;
     private ColorPieza turno;
+    private Pieza piezaSeleccionada;
 
     public GameAndroid(Context context, TableroChess board){
         this.context=context;
@@ -28,16 +30,35 @@ public class GameAndroid implements View.OnClickListener, IFinishGame {
         this.context=context;
         this.board=board;
         this.turno=ColorPieza.WHITE;
+        elegirCelda(board,turno);
     }
 
     @Override
     public void onClick(View view) {
-        Toast.makeText(view.getContext(), "Click en: " + ((Celda) view).getCoordenada().toString(), Toast.LENGTH_SHORT).show();
-    }
+//        Toast.makeText(view.getContext(), "Click en: " + ((Celda) view).getCoordenada().toString(), Toast.LENGTH_SHORT).show();
 
-    @Override
-    public void finish(ColorPieza winner, ColorPieza loser) {
+        Celda celda=(Celda) view;
 
+        if (piezaSeleccionada==null){
+            if (board.getCellAt(celda.getCoordenada())==null)
+                Toast.makeText(context, "CELDA VACIA", Toast.LENGTH_SHORT).show();
+            else if (!celda.getPieza().getColor().equals(turno))
+                Toast.makeText(context, "PIEZA DEL RIVAl", Toast.LENGTH_SHORT).show();
+            else if (celda.getPieza().getNextMove().size()==0)
+                Toast.makeText(context, "PIEZA SIN MOVIMIENTOS", Toast.LENGTH_SHORT).show();
+            else {
+                piezaSeleccionada= celda.getPieza();
+
+            }
+        }else {
+            boolean moved=piezaSeleccionada.moveTo(celda.getCoordenada());
+
+            if (moved){
+                board.resetColorBoard();
+                turno=turno.next();
+                piezaSeleccionada=null;
+            }
+        }
     }
 
     public void elegirCelda(View view, ColorPieza turno){

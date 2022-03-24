@@ -16,7 +16,7 @@ import es.ies.lavereda.mychessapplicationapi24.model.TableroChess;
  * TODO:
  *  1.- Poner los elementos gradicos con los id
  *  2.- interfaz para terminar el juego
- *
+ *  3.- añadir al game el tablero de les eliminades
  *
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -36,6 +36,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         Celda celda=(Celda) view;
-        Toast.makeText(this, "Click en " + celda, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Click en " + celda, Toast.LENGTH_SHORT).show();
     }
 }
