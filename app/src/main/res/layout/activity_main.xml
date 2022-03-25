@@ -34,8 +34,8 @@
 
     <es.ies.lavereda.mychessapplicationapi24.model.DeletedPanel
         android:id="@+id/PanelBlanco"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
@@ -47,8 +47,8 @@
 
     <es.ies.lavereda.mychessapplicationapi24.model.DeletedPanel
         android:id="@+id/PanelNegro"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"

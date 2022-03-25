@@ -30,7 +30,7 @@ public class GameAndroid implements View.OnClickListener {
         this.context=context;
         this.board=board;
         this.turno=ColorPieza.WHITE;
-        elegirCelda(board,turno);
+//        elegirCelda(board,turno);
     }
 
     @Override
@@ -59,6 +59,8 @@ public class GameAndroid implements View.OnClickListener {
                 piezaSeleccionada=null;
             }
         }
+
+
     }
 
     public void elegirCelda(View view, ColorPieza turno){
